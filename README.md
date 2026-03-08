@@ -113,7 +113,31 @@ SOURCE_INDEX_EMBED_MODEL = "qwen3-embedding:4b"
 
 For project-specific config, create `.codex/config.toml` in your project root and use the project path. In the Codex IDE, use MCP settings → Open config.toml.
 
-### Claude Desktop (Claude Code)
+### Claude Code (CLI)
+
+Claude Code uses the `claude mcp add` CLI. Options must come before the server name; `--` separates the name from the command.
+
+**Project scope** (creates `.mcp.json` in project root, shared with team):
+
+```bash
+claude mcp add --transport stdio --scope project goindexer -- /path/to/goindexer/bin/goindexer --path /path/to/your/project --watch
+```
+
+**User scope** (stored in `~/.claude.json`, available across projects):
+
+```bash
+claude mcp add --transport stdio --scope user goindexer -- /path/to/goindexer/bin/goindexer --path /path/to/your/project --watch
+```
+
+**With env vars:**
+
+```bash
+claude mcp add --transport stdio --scope project --env SOURCE_INDEX_EMBED_MODEL=qwen3-embedding:4b goindexer -- /path/to/goindexer/bin/goindexer --path /path/to/your/project --watch
+```
+
+Verify with `claude mcp list` or `/mcp` inside Claude Code.
+
+### Claude Desktop
 
 Config file location:
 
