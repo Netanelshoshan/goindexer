@@ -84,6 +84,86 @@ Switching to a model with a different dimension requires deleting the index and 
 | `find_references` | Find all references to a symbol. |
 | `delete_index` | Delete the index and clear all data. |
 
+## MCP Client Configuration
+
+Add goindexer as an MCP server in your preferred client. Replace `/path/to/goindexer/bin/goindexer` with the path to your built binary (e.g. `$HOME/dev/goindexer/go/bin/goindexer`), or add `go/bin` to your PATH.
+
+### Codex
+
+Config lives in `~/.codex/config.toml` (or project-scoped `.codex/config.toml` for trusted projects). Use the CLI or edit the file directly.
+
+**CLI:**
+
+```bash
+codex mcp add goindexer --env SOURCE_INDEX_WORKSPACE=/path/to/your/project -- /path/to/goindexer/bin/goindexer --path /path/to/your/project --watch
+```
+
+**config.toml:**
+
+```toml
+[mcp_servers.goindexer]
+command = "/path/to/goindexer/bin/goindexer"
+args = ["--path", "/path/to/your/project", "--watch"]
+cwd = "/path/to/your/project"
+
+[mcp_servers.goindexer.env]
+SOURCE_INDEX_OLLAMA_URL = "http://localhost:11434"
+SOURCE_INDEX_EMBED_MODEL = "qwen3-embedding:4b"
+```
+
+For project-specific config, create `.codex/config.toml` in your project root and use the project path. In the Codex IDE, use MCP settings → Open config.toml.
+
+### Claude Desktop (Claude Code)
+
+Config file location:
+
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+- **Linux:** `~/.config/Claude/claude_desktop_config.json`
+
+Or: Settings → Developer → Edit Config.
+
+```json
+{
+  "mcpServers": {
+    "goindexer": {
+      "command": "/path/to/goindexer/bin/goindexer",
+      "args": ["--path", "/path/to/your/project", "--watch"],
+      "env": {
+        "SOURCE_INDEX_OLLAMA_URL": "http://localhost:11434",
+        "SOURCE_INDEX_EMBED_MODEL": "qwen3-embedding:4b"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop after editing. Look for the hammer icon (🔨) to confirm tools are loaded.
+
+### VS Code
+
+Config in `.vscode/mcp.json` (workspace) or user profile. Command Palette: **MCP: Open User Configuration** or **MCP: Open Workspace Folder MCP Configuration**.
+
+```json
+{
+  "servers": {
+    "goindexer": {
+      "type": "stdio",
+      "command": "/path/to/goindexer/bin/goindexer",
+      "args": ["--path", "${workspaceFolder}", "--watch"],
+      "env": {
+        "SOURCE_INDEX_OLLAMA_URL": "http://localhost:11434",
+        "SOURCE_INDEX_EMBED_MODEL": "qwen3-embedding:4b"
+      }
+    }
+  }
+}
+```
+
+Use `${workspaceFolder}` so each workspace uses its own path. Ensure the goindexer binary is on your PATH or use an absolute path.
+
+---
+
 ## Gemini CLI Extension
 
 ### Install
