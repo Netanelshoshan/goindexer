@@ -1,0 +1,4 @@
+description = "Delete the codebase index. Clears all indexed data."
+prompt = """
+Please delete the codebase index. Use the delete_index tool.
+"""

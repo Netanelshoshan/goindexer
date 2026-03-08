@@ -1,0 +1,4 @@
+description = "Index this codebase for semantic search. Use the index_codebase tool."
+prompt = """
+Please index this codebase. Use the index_codebase tool to start indexing.
+"""

@@ -1,0 +1,9 @@
+bin/
+.goindexer/
+*.log
+go/goindexer
+go/goindexer.exe
+go/index_root.txt
+go/manifest.json
+index_root.txt
+manifest.json

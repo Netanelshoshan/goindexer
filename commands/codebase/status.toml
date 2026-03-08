@@ -1,0 +1,4 @@
+description = "Get the current indexing status (idle, running, completed, failed)."
+prompt = """
+Please get the current index status. Use the get_index_status tool and report the result to the user.
+"""
