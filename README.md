@@ -4,7 +4,14 @@
   <img src="goindexer.png" alt="goindexer" width="320"/>
 </p>
 
-Semantic code search and codebase understanding via MCP. Uses tree-sitter chunking, Ollama embeddings, and SQLite vector search.
+
+## What is goindexer?
+Finding the right code in a large codebase is hard. Grep finds exact strings. IDE search finds symbols. But what about *concepts*? "Where do we handle authentication errors?" or "Show me the OTP validation logic" — those questions need semantic understanding. I built **goindexer** to solve exactly that: semantic code search that runs entirely on your machine and plugs into your favorite AI tools via MCP (Model Context Protocol).
+
+goindexer is an MCP server that indexes your codebase and exposes semantic search, grep, file reading, structure listing, and symbol reference finding. It's designed to work with Cursor, Claude Desktop, Gemini CLI, or any MCP client. Everything runs locally: tree-sitter for parsing, Ollama for embeddings, SQLite for vector storage. No cloud APIs, no API keys.
+
+The motivation was to save on some tokens and speed up the search process for cli tools like claude/codex/gemini and vscode. They usually 'grep search' for patterns and then read the context around the match. goindexer can do that in one go which saves on tokens and time.
+
 
 ## Prerequisites
 
